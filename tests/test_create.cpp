@@ -59,7 +59,7 @@ TEST_CASE("test create app argument parsing")
             CHECK(create_options.announce_list.at(2)==std::vector{{tracker3}});
         }
         SECTION("multiple tiers") {
-            auto cmd = fmt::format("create {} --announce {} [{} {}]", file, tracker1, tracker2, tracker3);
+            auto cmd = fmt::format(R"(create {} --announce {} "[{}" "{}]")", file, tracker1, tracker2, tracker3);
 
             PARSE_ARGS(cmd);
 
@@ -367,13 +367,13 @@ TEST_CASE("test create app argument parsing")
             CHECK(create_options.include_patterns.empty());
         }
         SECTION("single value given") {
-            auto cmd = fmt::format("create {} --include \"{}\"", file, ".*\\.git.*");
+            auto cmd = fmt::format("create {} --include \"{}\"", file, ".*\\\\.git.*");
             PARSE_ARGS(cmd);
             CHECK(create_options.include_patterns.size()==1);
             CHECK(create_options.include_patterns.at(0)==".*\\.git.*");
         }
         SECTION("multiple values given") {
-            auto cmd = fmt::format(R"(create {} --include "{}" "{}" --include-hidden)", file, "*.\\.git.*", ".*test.*");
+            auto cmd = fmt::format(R"(create {} --include "{}" "{}" --include-hidden)", file, "*.\\\\.git.*", ".*test.*");
             PARSE_ARGS(cmd);
             CHECK(create_options.include_patterns.size()==2);
             CHECK(create_options.include_patterns.at(0)=="*.\\.git.*");
@@ -394,7 +394,7 @@ TEST_CASE("test create app argument parsing")
             CHECK(create_options.exclude_patterns.at(0)=="*.git.*");
         }
         SECTION("multiple values given") {
-            auto cmd = fmt::format(R"(create {} --exclude "{}" "{}" --include-hidden)", file, "*.\\.git.*", ".*test.*");
+            auto cmd = fmt::format(R"(create {} --exclude "{}" "{}" --include-hidden)", file, "*.\\\\.git.*", ".*test.*");
             PARSE_ARGS(cmd);
             CHECK(create_options.exclude_patterns.size()==2);
             CHECK(create_options.exclude_patterns.at(0)=="*.\\.git.*");

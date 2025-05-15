@@ -195,9 +195,9 @@ tracker_database* load_tracker_database()
 {
 
     static std::vector<fs::path> data_dirs {
+        BUILD_DATA_DIR,
         get_user_data_dir(),
         GLOBAL_DATA_DIR,
-        BUILD_DATA_DIR,
     };
 
     if (tracker_db_ptr) {

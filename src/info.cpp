@@ -286,23 +286,23 @@ void format_announces(std::ostream& os, const dottorrent::metafile& metafile, co
 
     std::size_t tier_index = 0;
     auto [tier_begin, tier_end] = announce_urls.get_tier(tier_index);
-    auto line = fmt::format(tracker_tier_entry, tier_index+1, *tier_begin++);
+    auto line = fmt::format(tracker_tier_entry, tier_index+1, (*tier_begin++).url);
     fmt::format_to(out, fmt::runtime(options.entry_format), "Announce-urls:", line);
 
     // Finish current tier
     for ( ; tier_begin != tier_end; ++tier_begin) {
-        line = fmt::format(tracker_entry, *tier_begin);
+        line = fmt::format(tracker_entry, (*tier_begin).url);
         fmt::format_to(out, fmt::runtime(options.entry_continuation_format), line);
     }
 
     // Finish other tiers
     for (tier_index += 1; tier_index < announce_urls.tier_count(); ++tier_index) {
         auto [tier_begin, tier_end] = announce_urls.get_tier(tier_index);
-        auto line = fmt::format(tracker_tier_entry, tier_index+1, *tier_begin++);
+        auto line = fmt::format(tracker_tier_entry, tier_index+1, (*tier_begin++).url);
         fmt::format_to(out, fmt::runtime(options.entry_continuation_format), line);
 
         for ( ; tier_begin != tier_end; ++tier_begin) {
-            line = fmt::format(tracker_entry, *tier_begin);
+            line = fmt::format(tracker_entry, (*tier_begin).url);
             fmt::format_to(out, fmt::runtime(options.entry_continuation_format), line);
         }
     }

@@ -12,6 +12,7 @@
 #endif
 
 #include <fmt/format.h>
+#include <fmt/ranges.h>
 #include <CLI/CLI.hpp>
 #include <CLI/Error.hpp>
 

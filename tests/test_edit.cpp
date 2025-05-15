@@ -67,7 +67,7 @@ TEST_CASE("test edit app argument parsing")
             CHECK(edit_options.announce_list->at(2) == std::vector{{tracker3}});
         }
         SECTION("multiple tiers") {
-            auto cmd = fmt::format("edit {} --announce {} [{} {}]", file, tracker1, tracker2, tracker3);
+            auto cmd = fmt::format(R"(edit {} --announce {} "[{}" "{}]")", file, tracker1, tracker2, tracker3);
             PARSE_ARGS(cmd);
 
             CHECK(edit_options.announce_list.has_value());

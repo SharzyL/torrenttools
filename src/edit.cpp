@@ -83,7 +83,7 @@ void configure_edit_app(CLI::App* app, edit_app_options& options)
 
     app->add_option("-a,--announce", announce_parser,
                "Add one or multiple announces urls.\n"
-               "Multiple trackers will be added in seperate tiers by default.\n"
+               "Multiple trackers will be added in separate tiers by default.\n"
                "Use square brackets to groups urls in a single tier:\n"
                "eg. \"url1 [url1 url2]\"")
        ->type_name("<url>...")

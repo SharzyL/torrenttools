@@ -177,9 +177,9 @@ const profile& config::get_profile(std::string_view profile_name) const
 config* load_config()
 {
     std::vector<fs::path> data_dirs {
+        BUILD_DATA_DIR,
         get_user_data_dir(),
         GLOBAL_DATA_DIR,
-        BUILD_DATA_DIR,
     };
 
     if (config_ptr) {
