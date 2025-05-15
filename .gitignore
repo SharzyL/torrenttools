@@ -3,3 +3,5 @@ venv/**
 **/.vscode/**
 **/cmake-build-*/**
 **/.DS_Store
+build
+include/config.hpp
